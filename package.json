@@ -1,0 +1,33 @@
+{
+  "name": "Nextinz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "migrate": "sequelize db:migrate",
+    "unmigrate": "sequelize db:migrate:undo:all",
+    "seed-up": "sequelize db:seed:all",
+    "seed-down": "sequelize db:seed:undo:all",
+    "lintfix": "eslint --fix .",
+    "lint": "eslint ."
+  },
+  "author": {
+    "name": "Lilit Matshkalyan",
+    "email": "lil.matshkalyan@gmail.com",
+    "role": "Backend Developer"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "dotenv": "^10.0.0",
+    "fastest-validator": "^1.11.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-compose": "^4.1.0",
+    "koa-respond": "^2.1.0",
+    "koa-router": "^10.1.1",
+    "pg": "^8.7.1",
+    "sequelize": "^6.6.5"
+  }
+}

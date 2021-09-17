@@ -1,0 +1,5 @@
+module.exports = {
+  // general
+  PERMISSION_DENIED: 'PERMISSION_DENIED',
+  RESOURCE_NOT_FOUND: 'RESOURCE_NOT_FOUND',
+};
