@@ -10,29 +10,34 @@
  * */
 
 const {
-    STUDENT, CLAZZ, STUDENT_STUDENT_GRADE
+    STUDENT_GRADE, STUDENT_STUDENT_GRADE, SUBJECT_STUDENT_GRADE
 } = require('../lcp/resources');
 const { PUBLIC } = require('../lcp/schemas');
 
 
 module.exports = (sequelize, DataTypes) => {
-    const Student = sequelize.define(
-        STUDENT.MODEL,
+    const StudentGrade = sequelize.define(
+        STUDENT_GRADE.MODEL,
         {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4
             },
-            fullName: {
-                required: true,
-                allowNull: false,
-                type: DataTypes.STRING
-            },
-            clazzId: {
+            studentId: {
                 required: true,
                 allowNull: false,
                 type: DataTypes.UUID
+            },
+            subjectId: {
+                required: true,
+                allowNull: false,
+                type: DataTypes.UUID
+            },
+            grade: { // TODO change to enum
+                required: true,
+                allowNull: false,
+                type: DataTypes.INTEGER
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -53,24 +58,28 @@ module.exports = (sequelize, DataTypes) => {
                     fields: ['id']
                 },
                 {
-                    fields: ['clazzId']
+                    fields: ['studentId']
+                },
+                {
+                    fields: ['subjectId']
                 }
             ]
         }
     );
 
-    Student.associate = (models) => {
-        Student.belongsTo(models.Clazz, {
-            as: CLAZZ.ALIAS.PLURAL,
-            foreignKey: 'clazzId',
+    StudentGrade.associate = (models) => {
+        StudentGrade.belongsTo(models.Student, {
+            as: STUDENT_STUDENT_GRADE.ALIAS.PLURAL,
+            foreignKey: 'studentId',
             onDelete: 'CASCADE'
         });
-        Student.hasMany(models.StudentGrade, {
-            as: STUDENT_STUDENT_GRADE.ALIAS.PLURAL,
-            foreignKey: 'studentId'
+        StudentGrade.belongsTo(models.Subject, {
+            as: SUBJECT_STUDENT_GRADE.ALIAS.PLURAL,
+            foreignKey: 'subjectId',
+            onDelete: 'CASCADE'
         });
     };
 
 
-    return Student;
+    return StudentGrade;
 };

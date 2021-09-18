@@ -10,29 +10,24 @@
  * */
 
 const {
-    STUDENT, CLAZZ, STUDENT_STUDENT_GRADE
+    TEACHER
 } = require('../lcp/resources');
 const { PUBLIC } = require('../lcp/schemas');
 
 
 module.exports = (sequelize, DataTypes) => {
-    const Student = sequelize.define(
-        STUDENT.MODEL,
+    const Teacher = sequelize.define(
+        TEACHER.MODEL,
         {
             id: {
                 type: DataTypes.UUID,
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4
             },
-            fullName: {
+            name: {
                 required: true,
                 allowNull: false,
                 type: DataTypes.STRING
-            },
-            clazzId: {
-                required: true,
-                allowNull: false,
-                type: DataTypes.UUID
             },
             createdAt: {
                 type: DataTypes.DATE,
@@ -51,26 +46,22 @@ module.exports = (sequelize, DataTypes) => {
                 {
                     unique: true,
                     fields: ['id']
-                },
-                {
-                    fields: ['clazzId']
                 }
             ]
         }
     );
 
-    Student.associate = (models) => {
-        Student.belongsTo(models.Clazz, {
-            as: CLAZZ.ALIAS.PLURAL,
-            foreignKey: 'clazzId',
-            onDelete: 'CASCADE'
+    Teacher.associate = (models) => {
+        Teacher.hasOne(models.Clazz, {
+            as: TEACHER.ALIAS.SINGULAR,
+            foreignKey: 'teacherId'
         });
-        Student.hasMany(models.StudentGrade, {
-            as: STUDENT_STUDENT_GRADE.ALIAS.PLURAL,
-            foreignKey: 'studentId'
+        Teacher.hasMany(models.Subject, {
+            as: TEACHER.ALIAS.PLURAL,
+            foreignKey: 'teacherId'
         });
     };
 
 
-    return Student;
+    return Teacher;
 };
