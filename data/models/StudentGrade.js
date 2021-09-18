@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 type: DataTypes.UUID
             },
-            grade: { // TODO change to enum
+            grade: {
                 required: true,
                 allowNull: false,
                 type: DataTypes.INTEGER
@@ -62,6 +62,10 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 {
                     fields: ['subjectId']
+                },
+                {
+                    unique: true,
+                    fields: ['studentId', 'subjectId']
                 }
             ]
         }

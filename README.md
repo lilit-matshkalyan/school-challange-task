@@ -1,2 +1,1 @@
-# backend-gateway-service
-# school-challange-task
+# school-challenge-task

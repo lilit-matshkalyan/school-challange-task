@@ -16,6 +16,8 @@ const router = new Router({
 });
 
 
+const StudentGradeRoute = require('./StudentGradeRoute');
+
 router.post('/', async (ctx) => {
   await validator.customValidation(ctx.request.body, createStudentSchema);
 
@@ -64,6 +66,8 @@ router.get('/:id',async (ctx) => {
 
   return ctx.ok(result);
 });
+
+router.use(StudentGradeRoute.routes());
 
 
 module.exports = router;
