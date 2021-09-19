@@ -9,8 +9,10 @@ const router = new Router({
 
 
 const studentRouter = require('./student');
+const studentGradeRoute = require('./grade');
 
 router.use(studentRouter.routes());
+router.use(studentGradeRoute.routes());
 
 
 router.get('/ping', async ctx => ctx.ok('pong v1.0.0'));
