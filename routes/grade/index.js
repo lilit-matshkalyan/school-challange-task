@@ -42,5 +42,15 @@ router.get('/subject', async (ctx) => {
   return ctx.created(result);
 });
 
+router.get('/clazz', async (ctx) => {
+  const queryParams = parseQueryParams(ctx.request.query);
+
+  const result = await StudentGradeController.getClazzByStudAvgGrades({
+    queryParams
+  });
+
+  return ctx.created(result);
+});
+
 
 module.exports = router;
