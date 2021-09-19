@@ -6,8 +6,8 @@ class Database {
   async init() {
     await sequelize.authenticate();
     console.info('Connected to database ✅');
-
-    return await sequelize.sync();
+    // TODO uncomment to migrate tables
+    // return await sequelize.sync();
   }
 }
 

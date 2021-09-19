@@ -1,4 +1,4 @@
-const StudentGradeService = require('../../services/student/StudentGradeService');
+const StudentGradeService = require('../../services/grade/StudentGradeService');
 
 
 /**
@@ -13,7 +13,15 @@ class StudentGradeController {
   static async create({ data }) {
     // TODO check student and subject existence
     return StudentGradeService.create({ data });
+  }
 
+  /**
+   *
+   * @param queryParams
+   * @returns {Promise<{total: *, data: *}>}
+   */
+  static async getStudentsByAvgGrades({ queryParams }) {
+    return StudentGradeService.getStudentsByAvgGrades({ queryParams });
   }
 }
 
