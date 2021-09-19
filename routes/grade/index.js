@@ -32,5 +32,15 @@ router.get('/student', async (ctx) => {
   return ctx.created(result);
 });
 
+router.get('/subject', async (ctx) => {
+  const queryParams = parseQueryParams(ctx.request.query);
+
+  const result = await StudentGradeController.getSubjectsByStudAvgGrades({
+    queryParams
+  });
+
+  return ctx.created(result);
+});
+
 
 module.exports = router;

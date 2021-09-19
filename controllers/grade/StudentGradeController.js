@@ -23,6 +23,15 @@ class StudentGradeController {
   static async getStudentsByAvgGrades({ queryParams }) {
     return StudentGradeService.getStudentsByAvgGrades({ queryParams });
   }
+
+  /**
+   *
+   * @param queryParams
+   * @returns {Promise<{total: number, data: *}>}
+   */
+  static async getSubjectsByStudAvgGrades({ queryParams }) {
+    return StudentGradeService.getSubjectsByStudAvgGrades({ queryParams });
+  }
 }
 
 module.exports = StudentGradeController;
